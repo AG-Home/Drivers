@@ -33,6 +33,6 @@ int main(void)
 
     __bic_SR_register(GIE);
     P2DIR = 0x2;
-    P2OUT = 0x2;
+    P2OUT = 0x2
     return 0;
 }
