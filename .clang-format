@@ -61,7 +61,7 @@ ColumnLimit : 0
 IndentCaseBlocks : true
 IndentCaseLabels : true
 IndentExternBlock : AfterExternBlock
-IndentPPDirectives : AfterHash
+IndentPPDirectives : None
 
 KeepEmptyLinesAtTheStartOfBlocks : false
 
