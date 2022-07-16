@@ -20,7 +20,7 @@ jobs:
     - name: build
       run: ./build.sh
     - name: doxygen
-      run: ./run_doxygen.sh
+      run: doxygen-1.9.4/bin/doxygen config-doxygen.conf
     # - name: make check
       # run: make check
     # - name: make distcheck
