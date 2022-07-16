@@ -19,6 +19,8 @@ jobs:
       run: make
     - name: build
       run: ./build.sh
+    - name: doxygen
+      run: ./run_doxygen.sh
     # - name: make check
       # run: make check
     # - name: make distcheck

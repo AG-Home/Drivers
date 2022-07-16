@@ -6,3 +6,5 @@ main.o
 /debugger/.metadata/
 /debugger/dvt/
 /debugger/RemoteSystemsTempFiles/
+/documentation/
+doxygen.log
