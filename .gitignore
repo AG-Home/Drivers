@@ -2,3 +2,7 @@ APPL.out
 build.log
 main.o
 /build/
+/debugger/.jxbrowser.userdata/
+/debugger/.metadata/
+/debugger/dvt/
+/debugger/RemoteSystemsTempFiles/

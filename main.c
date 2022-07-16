@@ -32,7 +32,7 @@ int main(void)
     WDTCTL = WDTPW | WDTHOLD;
 
     __bic_SR_register(GIE);
-    P2DIR = 0x2;
-    P2OUT = 0x2;
+    P2DIR = 0x1;
+    P2OUT = 0x1;
     return 0;
 }
