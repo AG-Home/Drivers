@@ -1,4 +1,9 @@
-// #include <intrinsics.h>
+/****************************************************************************
+ * \file    main.c
+ * \version 1.0
+ * \author  Marco Aguilar
+ * \brief   main
+ ****************************************************************************/
 #include <in430.h>
 
 #define REG_16BITS(address) *(signed short int*)address ///< De-reference for 16bits register
@@ -26,6 +31,15 @@
 #define WDTPW (0x5A00)
 #define WDTHOLD (0x0080)
 
+/**
+ *
+ * main function where all is called
+ *  \startuml
+ *    Sender->Receiver  : Commands()
+ *    Sender<--Receiver : Ack()
+ *  \enduml
+ *
+ */
 
 int main(void)
 {
