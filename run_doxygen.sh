@@ -5,4 +5,4 @@ then
     mkdir documentation
 fi
 
-doxygen config-doxygen.conf 2> doxygen.log
+doxygen-1.9.4/bin/doxygen config-doxygen.conf 2> doxygen.log
