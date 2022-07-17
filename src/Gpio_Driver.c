@@ -1,5 +1,5 @@
 /**********************************************************************************************************************
- * \file Std_Types.h
+ * \file Gpio_Driver.c
  *
  * \author  Marco Aguilar
  *
@@ -10,27 +10,21 @@
  * This file contains:
  *  - Definitions
  *  - Types
- *  which are relevant for std types
+ *  - Interface Prototypes
+ *  which are relevant for the GPIO Driver
  *********************************************************************************************************************/
 
-#ifndef STD_TYPES_H
-#define STD_TYPES_H
+#include <Gpio_Driver.h>
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-typedef signed char        sint8;
-typedef unsigned char      uint8;
-
-typedef signed short int   sint16;
-typedef unsigned short int uint16;
-
-typedef signed long int    sint32;
-typedef unsigned long int  uint32;
+void GPIO_v_configPin(t_PortPin e_pin, t_Port e_port, t_PinDir e_dir)
+{
+    
+}
 
 #ifdef __cplusplus
 }
-#endif
-
 #endif

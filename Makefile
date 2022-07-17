@@ -12,4 +12,4 @@ CFLAGS = -I $(INCLUDES) -mmcu=$(DEVICE) -O2 -g
 LFLAGS = -L $(LINKER_FILES) -T $(LINKER_FILES)lnk_msp430g2553.cmd
 
 all: $(OBJECTS)
-	$(CC) $(CFLAGS) $(LFLAGS) $? -o $(APPL).out -v
+	$(CC) $(CFLAGS) $(LFLAGS) main.c -o $(APPL).out -v

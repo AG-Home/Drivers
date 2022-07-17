@@ -1,5 +1,5 @@
 /**********************************************************************************************************************
- * \file Std_Types.h
+ * \file MSP430_Types.h
  *
  * \author  Marco Aguilar
  *
@@ -10,24 +10,41 @@
  * This file contains:
  *  - Definitions
  *  - Types
- *  which are relevant for std types
+ *  - Interface Prototypes
+ *  which are relevant for the MSP's project
  *********************************************************************************************************************/
 
-#ifndef STD_TYPES_H
-#define STD_TYPES_H
+#ifndef MSP430_TYPES_H
+#define MSP430_TYPES_H
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-typedef signed char        sint8;
-typedef unsigned char      uint8;
+typedef enum
+{
+  bit0 = 1u,
+  bit1 = 2u,
+  bit2 = 4u,
+  bit3 = 8u,
+  bit4 = 16u,
+  bit5 = 32u,
+  bit6 = 64u,
+  bit7 = 128u,
 
-typedef signed short int   sint16;
-typedef unsigned short int uint16;
+} t_PortPin;
 
-typedef signed long int    sint32;
-typedef unsigned long int  uint32;
+typedef enum
+{
+  port1 = 0,
+  port2
+} t_Port;
+
+typedef enum
+{
+  input = 0,
+  output
+} t_PinDir;
 
 #ifdef __cplusplus
 }
