@@ -17,6 +17,11 @@
 #ifndef MSP430_TYPES_H
 #define MSP430_TYPES_H
 
+#include <Std_Types.h>
+
+#define OK  (uint8)0x00;
+#define NOK (uint8)0x01;
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -45,6 +50,13 @@ typedef enum
   input = 0,
   output
 } t_PinDir;
+
+typedef enum
+{
+  gpio      = 0,
+  primary   = 1,
+  secondary = 2
+} t_FunctionSelect;
 
 #ifdef __cplusplus
 }

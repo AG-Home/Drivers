@@ -6,9 +6,9 @@ Language: Cpp
 # Alignment
 AlignAfterOpenBracket : Align
 AlignArrayOfStructures : Right
-AlignConsecutiveAssignments: AcrossEmptyLinesAndComments 
+AlignConsecutiveAssignments: true 
 AlignConsecutiveBitFields : AcrossEmptyLinesAndComments
-AlignConsecutiveDeclarations : AcrossEmptyLinesAndComments
+AlignConsecutiveDeclarations : true
 AlignConsecutiveMacros: AcrossEmptyLines
 AlignEscapedNewlines : Right
 AlignOperands : AlignAfterOperator
@@ -23,7 +23,7 @@ AllowShortBlocksOnASingleLine : Always
 AllowShortCaseLabelsOnASingleLine : false
 AllowShortEnumsOnASingleLine : false
 AllowShortFunctionsOnASingleLine : Empty
-AllowShortIfStatementsOnASingleLine : AllIfsAndElse
+AllowShortIfStatementsOnASingleLine : Never
 AllowShortLoopsOnASingleLine : true
 
 AlwaysBreakAfterReturnType : None
@@ -50,7 +50,7 @@ BraceWrapping:
   AfterUnion : true
   AfterExternBlock : false
   BeforeCatch : true
-  BeforeElse : false
+  BeforeElse : true
   BeforeWhile : true
   SplitEmptyFunction : false
 BreakBeforeBinaryOperators : None
