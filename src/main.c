@@ -15,8 +15,8 @@ int main(void)
   WDTCTL = WDTPW | WDTHOLD;
 
   GPIO_v_init();
-  (void)GPIO_v_configPin(bit0, port2, output, gpio);
-  (void)GPIO_v_setPinState(bit0, port2, high);
+  (void)GPIO_v_configPin(bit1, port2, output, gpio);
+  (void)GPIO_v_setPinState(bit1, port2, high);
 
   return 0;
 }
