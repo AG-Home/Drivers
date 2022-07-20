@@ -8,7 +8,7 @@ LINKER_FILES = linker/
 
 DEVICE = msp430g2553
 CC = $(GCC_DIR)/msp430-elf-gcc
-CFLAGS = -I $(INCLUDES) -mmcu=$(DEVICE) -O2 -g
+CFLAGS = -I $(INCLUDES) -mmcu=$(DEVICE) -O2 -g -Wall -std=c99 -v
 LFLAGS = -L $(LINKER_FILES) -T $(LINKER_FILES)lnk_msp430g2553.cmd
 
 all: $(OBJECTS)

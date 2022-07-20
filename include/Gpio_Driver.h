@@ -28,7 +28,7 @@ void GPIO_v_init(void);
 
 uint8 GPIO_v_configPin(t_PortPin e_pin, t_Port e_port, t_PinDir e_dir, t_FunctionSelect e_function);
 
-void GPIO_v_setPinState(t_PortPin e_pin, t_Port e_port, uint8 u_state);
+uint8 GPIO_v_setPinState(t_PortPin e_pin, t_Port e_port, t_PinState u_state);
 
 void GPIO_v_getPinState(t_PortPin e_pin, t_Port e_port, uint8 u_state);
 

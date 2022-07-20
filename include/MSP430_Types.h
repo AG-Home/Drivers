@@ -58,6 +58,12 @@ typedef enum
   secondary = 2
 } t_FunctionSelect;
 
+typedef enum
+{
+  low  = 0,
+  high = 1
+} t_PinState;
+
 #ifdef __cplusplus
 }
 #endif
