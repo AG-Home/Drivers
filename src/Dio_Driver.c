@@ -20,7 +20,7 @@
 /// DIO driver has not been initialized
 #define NOT_INITIALIZED (uint8)0u
 /// DIO driver has been initialized
-#define INITIALIZED     (uint8)1u
+#define INITIALIZED (uint8)1u
 
 #ifdef __cplusplus
 extern "C" {
@@ -46,7 +46,7 @@ static t_PinDir DIO_t_getPinDir(t_Port e_port, t_PortPin e_pin);
 
 /**
  *
- * DIO_t_getPinState
+ * DIO_t_getPinFunction
  * Get pin state
  *
  * \param [in] e_port: Port 1 or 2 of MSP430g2553 \n
@@ -60,7 +60,7 @@ static t_PinDir DIO_t_getPinDir(t_Port e_port, t_PortPin e_pin);
  *          resolution = gpio/ secondary / primary
  *
  */
-static t_FunctionSelect DIO_t_getPinState(t_Port e_port, t_PortPin e_pin);
+static t_FunctionSelect DIO_t_getPinFunction(t_Port e_port, t_PortPin e_pin);
 
 /**
  *
@@ -190,7 +190,7 @@ static void DIO_v_setChannelDir(t_PortPin e_pin, uint8* p_dirAddr, t_PinDir e_di
   }
 }
 
-static t_FunctionSelect DIO_t_getPinState(t_Port e_port, t_PortPin e_pin)
+static t_FunctionSelect DIO_t_getPinFunction(t_Port e_port, t_PortPin e_pin)
 {
   uint8            pxsel;
   uint8            pxsel2;
@@ -371,15 +371,15 @@ uint8 DIO_u_configPin(t_PortPin e_pin, t_Port e_port, t_PinDir e_dir, t_Function
   return retVal;
 }
 
-uint8 DIO_v_setPinState(t_PortPin e_pin, t_Port e_port, t_PinState u_state)
+uint8 DIO_u_setPinState(t_PortPin e_pin, t_Port e_port, t_PinState u_state)
 {
   t_FunctionSelect statePin;
   t_PinDir         dirPin;
   uint8            retVal = OK;
 
-  statePin = DIO_t_getPinState(e_port, e_pin);
+  statePin = DIO_t_getPinFunction(e_port, e_pin);
   dirPin   = DIO_t_getPinDir(e_port, e_pin);
-  
+
   // Valid only for pins that are configured as GPIO and output
   if((statePin == gpio) && (dirPin == output))
   {
@@ -404,6 +404,54 @@ uint8 DIO_v_setPinState(t_PortPin e_pin, t_Port e_port, t_PinState u_state)
         else
         {
           P2OUT &= ~e_pin;
+        }
+        break;
+
+      default:
+        break;
+    }
+  }
+  else
+  {
+    retVal = NOK;
+  }
+
+  return retVal;
+}
+
+uint8 DIO_u_getPinState(t_PortPin e_pin, t_Port e_port, t_PinState* p_pinState)
+{
+  uint8            retVal = OK;
+  t_PinDir         dirPin;
+  t_FunctionSelect statePin;
+
+  statePin = DIO_t_getPinFunction(e_port, e_pin);
+  dirPin   = DIO_t_getPinDir(e_port, e_pin);
+
+  // Valid only for pins that are configured as GPIO and input
+  if((statePin == gpio) && (dirPin == input))
+  {
+    switch(e_port)
+    {
+      case port1:
+        if((P1IN & e_pin) == e_pin)
+        {
+          *p_pinState = high;
+        }
+        else
+        {
+          *p_pinState = low;
+        }
+        break;
+
+      case port2:
+        if((P2IN & e_pin) == e_pin)
+        {
+          *p_pinState = high;
+        }
+        else
+        {
+          *p_pinState = low;
         }
         break;
 

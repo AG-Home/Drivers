@@ -36,7 +36,6 @@ typedef enum
   bit5 = 32u,
   bit6 = 64u,
   bit7 = 128u,
-
 } t_PortPin;
 
 typedef enum

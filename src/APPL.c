@@ -16,7 +16,7 @@ int main(void)
 
   DIO_v_init();
   (void)DIO_u_configPin(bit1, port2, output, gpio, disabled);
-  (void)DIO_v_setPinState(bit1, port2, high);
+  (void)DIO_u_setPinState(bit1, port2, high);
 
   return 0;
 }

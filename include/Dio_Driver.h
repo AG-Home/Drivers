@@ -61,8 +61,8 @@ uint8 DIO_u_configPin(t_PortPin e_pin, t_Port e_port, t_PinDir e_dir, t_Function
 
 /**
  *
- * DIO_v_setPinState
- * Set state of a pin that is configured as a output
+ * DIO_u_setPinState
+ * Set state of a pin that is configured as an output
  *
  * \param [in] e_pin:       Pin port \n
  *                          data_type  = t_PortPin \n
@@ -78,9 +78,28 @@ uint8 DIO_u_configPin(t_PortPin e_pin, t_Port e_port, t_PinDir e_dir, t_Function
  *          resolution = OK / NOK
  *
  */
-uint8 DIO_v_setPinState(t_PortPin e_pin, t_Port e_port, t_PinState u_state);
+uint8 DIO_u_setPinState(t_PortPin e_pin, t_Port e_port, t_PinState u_state);
 
-void DIO_v_getPinState(t_PortPin e_pin, t_Port e_port, uint8 u_state);
+/**
+ *
+ * DIO_u_getPinState
+ * Get state of a pin that is configured as an input
+ *
+ * \param [in] e_pin:       Pin port \n
+ *                          data_type  = t_PortPin \n
+ *                          resolution = bit0 to bit7
+ * \param [in] e_port:      Port 1 or 2 of MSP430g2553 \n
+ *                          data_type  = t_Port \n
+ *                          resolution = port1 / port2
+ * \param [out] p_pinState: Pin's state \n
+ *                          data_type  = t_PinState* \n
+ *                          resolution = low / high
+ *
+ * \return  data_type  = uint8 \n
+ *          resolution = OK / NOK
+ *
+ */
+uint8 DIO_u_getPinState(t_PortPin e_pin, t_Port e_port, t_PinState* p_pinState);
 
 #ifdef __cplusplus
 }
