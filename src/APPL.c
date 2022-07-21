@@ -4,7 +4,7 @@
  * \author  Marco Aguilar
  * \brief   main
  ****************************************************************************/
-#include <Gpio_Driver.h>
+#include <Dio_Driver.h>
 #include <MSP430_Registers.h>
 
 #define WDTPW   (0x5A00)
@@ -14,9 +14,9 @@ int main(void)
 {
   WDTCTL = WDTPW | WDTHOLD;
 
-  GPIO_v_init();
-  (void)GPIO_v_configPin(bit1, port2, output, gpio);
-  (void)GPIO_v_setPinState(bit1, port2, high);
+  DIO_v_init();
+  (void)DIO_u_configPin(bit1, port2, output, gpio, disabled);
+  (void)DIO_v_setPinState(bit1, port2, high);
 
   return 0;
 }

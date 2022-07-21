@@ -1,5 +1,5 @@
 /**********************************************************************************************************************
- * \file MSP430_Types.h
+ * \file Dio_Types.h
  *
  * \author  Marco Aguilar
  *
@@ -63,6 +63,14 @@ typedef enum
   low  = 0,
   high = 1
 } t_PinState;
+
+typedef enum
+{
+  disabled = 0,
+  pullUp   = 1,
+  pullDown = 2
+
+} t_Ren;
 
 #ifdef __cplusplus
 }

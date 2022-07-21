@@ -1,5 +1,5 @@
 /**********************************************************************************************************************
- * \file Gpio_Driver.c
+ * \file Dio_Driver.c
  *
  * \author  Marco Aguilar
  *
@@ -11,10 +11,10 @@
  *  - Definitions
  *  - Types
  *  - Interface Prototypes
- *  which are relevant for the GPIO Driver
+ *  which are relevant for the DIO Driver
  *********************************************************************************************************************/
 
-#include <Gpio_Driver.h>
+#include <Dio_Driver.h>
 #include <MSP430_Registers.h>
 
 #define NOT_INITIALIZED (uint8)0u
@@ -24,14 +24,15 @@
 extern "C" {
 #endif
 
-static void             GPIO_v_setChannelFunction(t_PortPin e_pin, uint8* p_sel1, uint8* p_sel2, t_FunctionSelect e_function);
-static void             GPIO_v_setChannelDir(t_PortPin e_pin, uint8* p_dirAddr, t_PinDir e_dir);
-static t_PinDir         GPIO_t_getPinDir(t_Port e_port, t_PortPin e_pin);
-static t_FunctionSelect GPIO_t_getPinState(t_Port e_port, t_PortPin e_pin);
+static void             DIO_v_setChannelFunction(t_PortPin e_pin, uint8* p_sel1, uint8* p_sel2, t_FunctionSelect e_function);
+static void             DIO_v_setChannelDir(t_PortPin e_pin, uint8* p_dirAddr, t_PinDir e_dir);
+static t_PinDir         DIO_t_getPinDir(t_Port e_port, t_PortPin e_pin);
+static t_FunctionSelect DIO_t_getPinState(t_Port e_port, t_PortPin e_pin);
+static void             DIO_v_setPinRes(t_PortPin e_pin, t_Port e_port, t_PinDir e_dir, t_Ren e_res);
 
 static uint8 GpioInitialized = NOT_INITIALIZED;
 
-void GPIO_v_init(void)
+void DIO_v_init(void)
 {
   const uint8 allPinsPort = 0xFF;
 
@@ -52,7 +53,7 @@ void GPIO_v_init(void)
   P2REN = allPinsPort;
 }
 
-static void GPIO_v_setChannelFunction(t_PortPin e_pin, uint8* p_sel1, uint8* p_sel2, t_FunctionSelect e_function)
+static void DIO_v_setChannelFunction(t_PortPin e_pin, uint8* p_sel1, uint8* p_sel2, t_FunctionSelect e_function)
 {
   switch(e_function)
   {
@@ -73,7 +74,7 @@ static void GPIO_v_setChannelFunction(t_PortPin e_pin, uint8* p_sel1, uint8* p_s
   }
 }
 
-static void GPIO_v_setChannelDir(t_PortPin e_pin, uint8* p_dirAddr, t_PinDir e_dir)
+static void DIO_v_setChannelDir(t_PortPin e_pin, uint8* p_dirAddr, t_PinDir e_dir)
 {
   if(e_dir == input)
   {
@@ -85,7 +86,7 @@ static void GPIO_v_setChannelDir(t_PortPin e_pin, uint8* p_dirAddr, t_PinDir e_d
   }
 }
 
-static t_FunctionSelect GPIO_t_getPinState(t_Port e_port, t_PortPin e_pin)
+static t_FunctionSelect DIO_t_getPinState(t_Port e_port, t_PortPin e_pin)
 {
   t_FunctionSelect statePin;
   uint8            pxsel;
@@ -131,7 +132,7 @@ static t_FunctionSelect GPIO_t_getPinState(t_Port e_port, t_PortPin e_pin)
   return statePin;
 }
 
-static t_PinDir GPIO_t_getPinDir(t_Port e_port, t_PortPin e_pin)
+static t_PinDir DIO_t_getPinDir(t_Port e_port, t_PortPin e_pin)
 {
   t_PinDir retVal;
   switch(e_port)
@@ -165,7 +166,54 @@ static t_PinDir GPIO_t_getPinDir(t_Port e_port, t_PortPin e_pin)
   return retVal;
 }
 
-uint8 GPIO_v_configPin(t_PortPin e_pin, t_Port e_port, t_PinDir e_dir, t_FunctionSelect e_function)
+static void DIO_v_setPinRes(t_PortPin e_pin, t_Port e_port, t_PinDir e_dir, t_Ren e_res)
+{
+  switch(e_port)
+  {
+    case port1:
+      if((e_dir == input) || (e_res != disabled))
+      {
+        P1REN &= ~e_pin;
+      }
+      else
+      {
+        P1REN |= e_pin;
+        if(e_res == pullUp)
+        {
+          P1OUT |= e_pin;
+        }
+        else
+        {
+          P1OUT &= ~e_pin;
+        }
+      }
+      break;
+
+    case port2:
+      if((e_dir == input) || (e_res != disabled))
+      {
+        P2REN &= ~e_pin;
+      }
+      else
+      {
+        P2REN |= e_pin;
+        if(e_res == pullUp)
+        {
+          P2OUT |= e_pin;
+        }
+        else
+        {
+          P2OUT &= ~e_pin;
+        }
+      }
+      break;
+
+    default:
+      break;
+  }
+}
+
+uint8 DIO_u_configPin(t_PortPin e_pin, t_Port e_port, t_PinDir e_dir, t_FunctionSelect e_function, t_Ren e_res)
 {
   uint8 retVal = OK;
 
@@ -174,18 +222,19 @@ uint8 GPIO_v_configPin(t_PortPin e_pin, t_Port e_port, t_PinDir e_dir, t_Functio
     switch(e_port)
     {
       case port1:
-        GPIO_v_setChannelDir(e_pin, (uint8*)P1DIR_ADDR, e_dir);
-        GPIO_v_setChannelFunction(e_pin, (uint8*)P1SEL_ADDR, (uint8*)P1SEL2_ADDR, e_function);
+        DIO_v_setChannelDir(e_pin, (uint8*)P1DIR_ADDR, e_dir);
+        DIO_v_setChannelFunction(e_pin, (uint8*)P1SEL_ADDR, (uint8*)P1SEL2_ADDR, e_function);
         break;
 
       case port2:
-        GPIO_v_setChannelDir(e_pin, (uint8*)P2DIR_ADDR, e_dir);
-        GPIO_v_setChannelFunction(e_pin, (uint8*)P2SEL_ADDR, (uint8*)P2SEL2_ADDR, e_function);
+        DIO_v_setChannelDir(e_pin, (uint8*)P2DIR_ADDR, e_dir);
+        DIO_v_setChannelFunction(e_pin, (uint8*)P2SEL_ADDR, (uint8*)P2SEL2_ADDR, e_function);
         break;
 
       default:
         break;
     }
+    DIO_v_setPinRes(e_pin, e_port, e_dir, e_res);
   }
   else
   {
@@ -195,14 +244,14 @@ uint8 GPIO_v_configPin(t_PortPin e_pin, t_Port e_port, t_PinDir e_dir, t_Functio
   return retVal;
 }
 
-uint8 GPIO_v_setPinState(t_PortPin e_pin, t_Port e_port, t_PinState u_state)
+uint8 DIO_v_setPinState(t_PortPin e_pin, t_Port e_port, t_PinState u_state)
 {
   t_FunctionSelect statePin;
   t_PinDir         dirPin;
   uint8            retVal = OK;
 
-  statePin = GPIO_t_getPinState(e_port, e_pin);
-  dirPin   = GPIO_t_getPinDir(e_port, e_pin);
+  statePin = DIO_t_getPinState(e_port, e_pin);
+  dirPin   = DIO_t_getPinDir(e_port, e_pin);
 
   if((statePin == gpio) && (dirPin == output))
   {

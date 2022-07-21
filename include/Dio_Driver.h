@@ -1,5 +1,5 @@
 /**********************************************************************************************************************
- * \file Gpio_Driver.h
+ * \file Dio_Driver.h
  *
  * \author  Marco Aguilar
  *
@@ -14,23 +14,23 @@
  *  which are relevant for the GPIO Driver
  *********************************************************************************************************************/
 
-#ifndef GPIO_DRIVER_H
-#define GPIO_DRIVER_H
+#ifndef DIO_DRIVER_H
+#define DIO_DRIVER_H
 
-#include <MSP430_Types.h>
+#include <Dio_Types.h>
 #include <Std_Types.h>
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-void GPIO_v_init(void);
+void DIO_v_init(void);
 
-uint8 GPIO_v_configPin(t_PortPin e_pin, t_Port e_port, t_PinDir e_dir, t_FunctionSelect e_function);
+uint8 DIO_u_configPin(t_PortPin e_pin, t_Port e_port, t_PinDir e_dir, t_FunctionSelect e_function, t_Ren e_res);
 
-uint8 GPIO_v_setPinState(t_PortPin e_pin, t_Port e_port, t_PinState u_state);
+uint8 DIO_v_setPinState(t_PortPin e_pin, t_Port e_port, t_PinState u_state);
 
-void GPIO_v_getPinState(t_PortPin e_pin, t_Port e_port, uint8 u_state);
+void DIO_v_getPinState(t_PortPin e_pin, t_Port e_port, uint8 u_state);
 
 #ifdef __cplusplus
 }

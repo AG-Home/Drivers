@@ -1,4 +1,4 @@
 SRC_DIR = src/
 
-SRCS = $(SRC_DIR)Gpio_Driver.c \
-		$(SRC_DIR)main.c
+SRCS = $(SRC_DIR)Dio_Driver.c \
+		$(SRC_DIR)APPL.c
