@@ -24,10 +24,60 @@
 extern "C" {
 #endif
 
+/**
+ *
+ * DIO_v_init
+ * Init all pins for all ports
+ *
+ */
 void DIO_v_init(void);
 
+/**
+ *
+ * DIO_u_configPin
+ * Pin's configuration
+ *
+ * \param [in] e_pin:       Pin port \n
+ *                          data_type  = t_PortPin \n
+ *                          resolution = bit0 to bit7
+ * \param [in] e_port:      Port 1 or 2 of MSP430g2553 \n
+ *                          data_type  = t_Port \n
+ *                          resolution = port1 / port2
+ * \param [in] e_dir:       Pin direction \n
+ *                          data_type  = t_PinDir \n
+ *                          resolution = input / output
+ * \param [in] e_function:  Dio functionality \n
+ *                          data_type  = t_FunctionSelect \n
+ *                          resolution = gpio/ secondary / primary
+ * \param [in] e_res:       Set resistor internal \n
+ *                          data_type  = t_Ren \n
+ *                          resolution = disabled / pullUp / pullDown
+ *
+ * \return  data_type  = uint8 \n
+ *          resolution = OK / NOK
+ *
+ */
 uint8 DIO_u_configPin(t_PortPin e_pin, t_Port e_port, t_PinDir e_dir, t_FunctionSelect e_function, t_Ren e_res);
 
+/**
+ *
+ * DIO_v_setPinState
+ * Set state of a pin that is configured as a output
+ *
+ * \param [in] e_pin:       Pin port \n
+ *                          data_type  = t_PortPin \n
+ *                          resolution = bit0 to bit7
+ * \param [in] e_port:      Port 1 or 2 of MSP430g2553 \n
+ *                          data_type  = t_Port \n
+ *                          resolution = port1 / port2
+ * \param [in] u_state:     Pin state \n
+ *                          data_type  = t_PinState \n
+ *                          resolution = low / high
+ *
+ * \return  data_type  = uint8 \n
+ *          resolution = OK / NOK
+ *
+ */
 uint8 DIO_v_setPinState(t_PortPin e_pin, t_Port e_port, t_PinState u_state);
 
 void DIO_v_getPinState(t_PortPin e_pin, t_Port e_port, uint8 u_state);
