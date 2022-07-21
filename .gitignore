@@ -1,6 +1,6 @@
-APPL.out
-build.log
-main.o
+*.out
+*.log
+*.o
 /build/
 /debugger/.jxbrowser.userdata/
 /debugger/.metadata/

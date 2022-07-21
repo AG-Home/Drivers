@@ -5,6 +5,4 @@ then
     mkdir build
 fi
 
-make 2> build/build.log
-
-mv APPL.out build/APPL.out
+make all 2>&1 build/build.log
